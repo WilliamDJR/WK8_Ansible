@@ -17,9 +17,9 @@ provider "aws" {
 terraform {
     backend "s3" {
         encrypt              = true
-        //bucket               = "tfstate-willido"
-        bucket               = "evolt-failover-sydney-tfstate"
+        bucket               = "tfstate-willido" //change to your own
+        //bucket               = "evolt-failover-sydney-tfstate"
         region               = "ap-southeast-2"
-        key                  = "ansible-demo-tf.tfstate"
+        key                  = "ansible-demo-tf.tfstate" //change to your own
     }
 }
