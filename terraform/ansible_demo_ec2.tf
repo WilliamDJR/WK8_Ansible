@@ -8,17 +8,21 @@ data "aws_ami" "ubuntu22" {
 }
 
 resource "aws_instance" "example" {
-    for_each = toset(["example","jenkins-master", "jenkins-node"])
+    for_each = toset(["example","jenkins-master", "jenkins-node1", "jenkins-node2"])
   
     ami = data.aws_ami.ubuntu22.id
     
     instance_type = "t2.micro"
     key_name = "${aws_key_pair.deployer.key_name}"
   
-    tags = {
-      Name  = each.value
-      Project = "JRAnsible"
-    }
+    tags = merge(
+      {
+        Name  = each.value            
+      },
+      length(regexall("jenkins", each.value)) > 0 ? { Project = "jenkins" } : {},
+      length(regexall("master", each.value)) > 0 ? { Role = "master" } : {},
+      length(regexall("node", each.value)) > 0 ? { Role = "node" } : {}  
+    )
 }
 
 resource "aws_key_pair" "deployer" {

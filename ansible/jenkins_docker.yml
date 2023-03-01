@@ -9,15 +9,20 @@
         name: docker-compose
         state: present # declerative
         update_cache: yes
+    - name: install java
+      apt: name=openjdk-11-jre-headless update_cache=yes
 
-      #Install Jenkins (and jre)
+- hosts: tag_master
+  become: yes
+  become_user: root
+  user: ubuntu
+  tasks:
+      #Install Jenkins
     - name: ensure the jenkins apt repository key is installed
       apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
     - name: ensure the repository is configured
       apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
-    - name: install java
-      apt: name=openjdk-11-jre-headless update_cache=yes
     - name: ensure jenkins is installed
       apt: name=jenkins update_cache=yes
     - name: ensure jenkins is running
-      service: name=jenkins state=started
+      service: name=jenkins state=started      
