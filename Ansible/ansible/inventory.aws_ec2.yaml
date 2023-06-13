@@ -7,6 +7,6 @@ filters:
   tag:Project: jenkins
 keyed_groups:
   - prefix: tag # prefix is 'tag_'
-    key: tags['Role'] # the Name tag can be 'web' or 'redis'
+    key: tags['Role'] # the Role tag can be 'master' or 'node'
 
-    # so the groups are tag_web and tag_redis
+    # so the groups are tag_master and tag_node

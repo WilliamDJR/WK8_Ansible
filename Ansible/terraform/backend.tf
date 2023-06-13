@@ -6,7 +6,7 @@ terraform {
         }
     }
 
-    required_version = ">= 1.1.0"
+    required_version = ">= 1.2.0"
 }
 
 provider "aws" {
@@ -17,8 +17,7 @@ provider "aws" {
 terraform {
     backend "s3" {
         encrypt              = true
-        bucket               = "tfstate-willido" //change to your own
-        //bucket               = "evolt-failover-sydney-tfstate"
+        bucket               = "tfstate-william" //change to your own
         region               = "ap-southeast-2"
         key                  = "ansible-demo-tf.tfstate" //change to your own
     }

@@ -3,7 +3,7 @@ data "aws_ami" "ubuntu22" {
     owners = ["099720109477"] # Canonical
     filter {
       name   = "name"
-      values = ["ubuntu/images/hvm-ssd/ubuntu*22.04*"]
+      values = ["ubuntu/images/hvm-ssd/ubuntu*22.04*amd64*"]
     }    
 }
 
@@ -30,10 +30,10 @@ resource "aws_key_pair" "deployer" {
   public_key = file("${var.public_key_file_path}") 
 }
 
-resource "aws_security_group_rule" "allow_80" {
+resource "aws_security_group_rule" "allow_22" {
   type              = "ingress"
-  from_port         = 80
-  to_port           = 80
+  from_port         = 22
+  to_port           = 22
   protocol          = "tcp"
   security_group_id = var.default_security_group_id
   cidr_blocks       = ["0.0.0.0/0"]

@@ -48,6 +48,11 @@
         path: /home/ubuntu/ansible/demo2.conf
         state: absent
 
+    - name: Remove file again (delete file)
+      ansible.builtin.file:
+        path: /home/ubuntu/ansible/demo2.conf
+        state: absent        
+
     - name: Copy local file to remote with owner and permissions
       ansible.builtin.copy:
         src:  /etc/zsh/zshrc
